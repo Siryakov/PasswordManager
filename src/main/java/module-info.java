@@ -3,7 +3,8 @@ module com.example.passwordmanager {
     requires javafx.fxml;
 
     requires org.kordamp.bootstrapfx.core;
+    requires java.sql;
 
-    opens com.example.passwordmanager to javafx.fxml;
-    exports com.example.passwordmanager;
+    opens PM to javafx.fxml;
+    exports PM;
 }
