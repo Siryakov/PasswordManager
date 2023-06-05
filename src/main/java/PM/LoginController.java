@@ -40,8 +40,8 @@ public class LoginController {
     void initialize() {
 
         Login_loginButton.setOnAction(actionEvent -> {
-            String loginEmail = Login_email.getText().trim();
-            String loginPassword = Login_password.getText().trim();
+            String loginEmail = Login_email.getText().trim(); // Получение введенного электронного адреса для входа
+            String loginPassword = Login_password.getText().trim(); // Получение введенного пароля для входа
             if (!loginEmail.equals("") && !loginPassword.equals("")) {
                 loginUser(loginEmail, loginPassword);
             } else
@@ -59,7 +59,9 @@ public class LoginController {
         DatabaseHandler dbHandler = new DatabaseHandler();
         User user = new User();
         user.setEmail(loginEmail);
+
         user.setPassword(loginPassword);
+
         ResultSet result = dbHandler.getUser(user);
 
         int counter = 0;

@@ -28,22 +28,47 @@ public class SignInController {
     void initialize() {
 
         SignIn_SigninButton.setOnAction(actionEvent -> {
-            signUpNewUser();
+            try {
+                signUpNewUser();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         });
 
     }
 
-    private void signUpNewUser() {
+    private void signUpNewUser() throws Exception {
         DatabaseHandler dbHandler = new DatabaseHandler();
+        Encryption encryption = new Encryption();
+
         String email = SignIn_email.getText();
         String  password = SignIn_password.getText();
 
-        User user = new User(email,password);
 
+            byte[] salt = encryption.generateSalt();
+
+            String encryptedPassword = encryption.encrypt(password, password, salt);
+            System.out.println("Encrypted: " + encryptedPassword);
+            System.out.println(salt);
+            String decryptedText = encryption.decrypt(encryptedPassword, password, salt);
+            System.out.println("Decrypted: " + decryptedText);
+
+
+        User user = new User(email,encryptedPassword ,salt);
         dbHandler.signUser(user);
-
-
     }
+
+//    private void signUpNewUser() {
+//        DatabaseHandler dbHandler = new DatabaseHandler();
+//        String email = SignIn_email.getText();
+//        String  password = SignIn_password.getText();
+//
+//        User user = new User(email,password);
+//
+//        dbHandler.signUser(user);
+//
+//
+//    }
 
 
 }
