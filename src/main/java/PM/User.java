@@ -4,13 +4,17 @@ public class User {
 
     private String email;
     private String password;
-
     private byte[]  salt;
 
-    public User(String email, String password,byte[]  salt   ) {
+    private byte[] IV;
+
+
+
+    public User(String email, String password, byte[]  salt , byte[] IV ) {
         this.email = email;
         this.password = password;
         this.salt = salt;
+        this.IV = IV;
     }
 
     public User() {
@@ -40,4 +44,19 @@ public class User {
     public void setSalt(byte[] salt) {
         this.salt = salt;
     }
+
+    public byte[] getIV() {
+        return IV;
+    }
+
+    public void setIV(byte[] IV) {
+        this.IV = IV;
+    }
+
+
+
+
+
+
+
 }

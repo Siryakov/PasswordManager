@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10bfe6d0-a6a9-4b62-ab91-ba8c9f8dcc04" name="Changes" comment="authorization works , no encryption">
+    <list default="true" id="10bfe6d0-a6a9-4b62-ab91-ba8c9f8dcc04" name="Changes" comment="encryption mainPassword work">
+      <change afterPath="$PROJECT_DIR$/src/main/java/PM/UserStorage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/PM/Const.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PM/Const.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/PM/DatabaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PM/DatabaseHandler.java" afterDir="false" />
@@ -12,6 +13,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/PM/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PM/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/PM/SignInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PM/SignInController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/PM/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PM/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/PM/Main-menu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/PM/Main-menu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,11 +74,26 @@
       <option name="project" value="LOCAL" />
       <updated>1685926013590</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="encryption mainPassword work">
+      <created>1685977336247</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1685977336247</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="authorization works , no encryption" />
-    <option name="LAST_COMMIT_MESSAGE" value="authorization works , no encryption" />
+    <MESSAGE value="encryption mainPassword work" />
+    <option name="LAST_COMMIT_MESSAGE" value="encryption mainPassword work" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="salt" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

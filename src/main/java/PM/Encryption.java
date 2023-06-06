@@ -27,10 +27,7 @@ public class Encryption {
      * @return Зашифрованный текст в формате Base64.
      * @throws Exception Если произошла ошибка во время шифрования.
      */
-    public static String encrypt(String plaintext, String password, byte[] salt) throws Exception {
-        // Генерация случайного инициализационного вектора (IV)
-        byte[] iv = generateIV();
-
+    public static String encrypt(String plaintext, String password, byte[] salt, byte[] iv) throws Exception {
         // Генерация секретного ключа на основе пароля и соли
         SecretKey secretKey = generateSecretKey(password, salt, iv);
 
@@ -52,6 +49,7 @@ public class Encryption {
         // Кодирование зашифрованных данных в формат Base64 и возврат в виде строки
         return Base64.getEncoder().encodeToString(encryptedData);
     }
+
 
     /**
      * Расшифровывает зашифрованный текст с использованием AES-GCM расшифрования.
@@ -122,46 +120,34 @@ public class Encryption {
      *
      * @return Сгенерированный IV.
      */
-    private static byte[] generateIV() {
+    public static byte[] generateIV() {
         byte[] iv = new byte[GCM_IV_LENGTH];
         SecureRandom secureRandom = new SecureRandom();
         secureRandom.nextBytes(iv);
         return iv;
     }
 
-        public static void main(String[] args) {
+
+
+    public static void main(String[] args) {
         try {
             String plaintext = "Hello, World!";
             String password = "124125";
 
             byte[] salt = generateSalt();
-
-            String encryptedText = encrypt(plaintext, password, salt);
+            byte[] iv = generateIV();
+            String encryptedText = encrypt(plaintext, password, salt,iv);
             System.out.println("Encrypted: " + encryptedText);
-            System.out.println(salt);
+            String encryptedText2 = encrypt(plaintext, password, salt,iv);
+            System.out.println("Encrypted: " + encryptedText2);
+            String encryptedText3 = encrypt(plaintext, password, salt,iv);
+            System.out.println("Encrypted: " + encryptedText3);
+            System.out.println("Salt: " + Base64.getEncoder().encodeToString(salt));
+
             String decryptedText = decrypt(encryptedText, password, salt);
             System.out.println("Decrypted: " + decryptedText);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }
-
-
-//    public static void main(String[] args) {
-//        try {
-//            String plaintext = "Hello, World!";
-//            String password = "23";
-//
-//            byte[] salt = generateSalt();
-//
-//            String encryptedText = encrypt(plaintext, password, salt);
-//            System.out.println("Encrypted: " + encryptedText);
-//            System.out.println(salt);
-//            String decryptedText = decrypt(encryptedText, password, salt);
-//            System.out.println("Decrypted: " + decryptedText);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }

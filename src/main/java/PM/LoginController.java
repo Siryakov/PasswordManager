@@ -2,6 +2,8 @@ package PM;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -36,31 +38,47 @@ public class LoginController {
     @FXML
     private TextField Login_email;
 
+
+
     @FXML
     void initialize() {
 
         Login_loginButton.setOnAction(actionEvent -> {
             String loginEmail = Login_email.getText().trim(); // Получение введенного электронного адреса для входа
             String loginPassword = Login_password.getText().trim(); // Получение введенного пароля для входа
-            if (!loginEmail.equals("") && !loginPassword.equals("")) {
-                loginUser(loginEmail, loginPassword);
+            if (!loginEmail.equals("") && !loginPassword.equals("")) {// Проверка на пустые поля ввода
+                try {
+                    loginUser(loginEmail, loginPassword);// Вызов метода для входа пользователя
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             } else
-                System.out.println("Login or password empty");
+                System.out.println("Login or password empty");// Вывод сообщения, если поле ввода пустое
         });
 
 
-        Login_SigninButton.setOnAction(actionEvent -> {
+        Login_SigninButton.setOnAction(actionEvent -> {// Вызов метода для открытия новой сцены при нажатии кнопки "Регистрация"
             openNewScene("/PM/SignIn.fxml");
         });
 
     }
+    private void loginUser(String loginEmail, String loginPassword)  {
 
-    private void loginUser(String loginEmail, String loginPassword) {
         DatabaseHandler dbHandler = new DatabaseHandler();
+        Encryption encryption = new Encryption();
         User user = new User();
+        byte[] salt=getSalt(loginEmail);
+        byte[] IV=getIV(loginEmail);
         user.setEmail(loginEmail);
+        String encryptedPassword = null;
+        try {
+            encryptedPassword = encryption.encrypt(loginPassword, loginPassword, salt, IV);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
 
-        user.setPassword(loginPassword);
+        }
+
+        user.setPassword(encryptedPassword);
 
         ResultSet result = dbHandler.getUser(user);
 
@@ -84,6 +102,7 @@ public class LoginController {
         }
     }
 
+
     public void openNewScene(String windowName) {
         Login_SigninButton.getScene().getWindow().hide();
         FXMLLoader loader = new FXMLLoader();
@@ -99,5 +118,69 @@ public class LoginController {
         stage.setScene(new Scene(root));
         stage.showAndWait();
     }
+
+    public byte[] getSalt(String email) {
+        byte[] salt = null;
+
+        String select = "SELECT " + Const.USER_SALT + " FROM " + Const.USER_TABLE + " WHERE " + Const.USER_LOGIN + " = ?";
+
+        try {
+            DatabaseHandler dbHandler = new DatabaseHandler();
+            Connection connection = dbHandler.getDbConnection();
+            if (connection != null) {
+                PreparedStatement prSt = connection.prepareStatement(select);
+                prSt.setString(1, email);
+                ResultSet resultSet = prSt.executeQuery();
+
+                if (resultSet.next()) {
+                    salt = resultSet.getBytes(Const.USER_SALT);
+                }
+
+                resultSet.close();
+                prSt.close();
+            } else {
+                System.out.println("Failed to establish database connection.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return salt;
+    }
+
+    public byte[] getIV(String email) {
+        byte[] salt = null;
+
+        String select = "SELECT " + Const.USER_IV + " FROM " + Const.USER_TABLE + " WHERE " + Const.USER_LOGIN + " = ?";
+
+        try {
+            DatabaseHandler dbHandler = new DatabaseHandler();
+            Connection connection = dbHandler.getDbConnection();
+            if (connection != null) {
+                PreparedStatement prSt = connection.prepareStatement(select);
+                prSt.setString(1, email);
+                ResultSet resultSet = prSt.executeQuery();
+
+                if (resultSet.next()) {
+                    salt = resultSet.getBytes(Const.USER_IV);
+                }
+
+                resultSet.close();
+                prSt.close();
+            } else {
+                System.out.println("Failed to establish database connection.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return salt;
+    }
+
+
 }
 
