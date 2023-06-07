@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -8,11 +9,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="615.0" prefWidth="882.0" style="-fx-background-color: #222222;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PM.MainMenuController">
+<AnchorPane prefHeight="619.0" prefWidth="1119.0" style="-fx-background-color: #222222;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PM.MainMenuController">
    <children>
       <AnchorPane layoutY="82.0" prefHeight="533.0" prefWidth="221.0" style="-fx-background-color: #3d3d3d;">
          <children>
-            <VBox fx:id="MainMenu_VBox" prefHeight="492.0" prefWidth="221.0" />
+            <VBox fx:id="MainMenu_VBox" layoutX="1.0" prefHeight="492.0" prefWidth="221.0" />
             <Button fx:id="MainMenu_addButton" layoutX="20.0" layoutY="492.0" mnemonicParsing="false" onAction="#addButtonClicked" prefHeight="14.0" prefWidth="182.0" text="+" textAlignment="CENTER">
                <font>
                   <Font size="16.0" />
@@ -20,16 +21,25 @@
             </Button>
          </children>
       </AnchorPane>
-      <Pane layoutY="29.0" prefHeight="53.0" prefWidth="882.0" style="-fx-background-color: #363636;" />
-      <AnchorPane layoutX="221.0" layoutY="82.0" prefHeight="533.0" prefWidth="221.0" style="-fx-background-color: #363636;" />
-      <Pane fx:id="MainMenu_editPane" layoutX="442.0" layoutY="82.0" prefHeight="533.0" prefWidth="440.0">
+      <Pane layoutY="29.0" prefHeight="53.0" prefWidth="1121.0" style="-fx-background-color: #363636;" />
+      <AnchorPane layoutX="221.0" layoutY="82.0" prefHeight="537.0" prefWidth="899.0" style="-fx-background-color: #363636;">
          <children>
-            <TextField fx:id="MainMenu_editPane_websiteName" layoutX="6.0" layoutY="108.0" prefHeight="25.0" prefWidth="425.0" promptText="website_name" />
-            <TextField fx:id="MainMenu_editPane_url" layoutX="8.0" layoutY="189.0" prefHeight="25.0" prefWidth="418.0" promptText="url" />
-            <TextField fx:id="MainMenu_editPane_login" layoutX="3.0" layoutY="277.0" prefHeight="25.0" prefWidth="425.0" promptText="login" />
-            <PasswordField fx:id="MainMenu_editPane_password" layoutX="5.0" layoutY="371.0" prefHeight="25.0" prefWidth="425.0" promptText="password" />
-            <Button fx:id="MainMenu_editPane_add" layoutX="176.0" layoutY="457.0" mnemonicParsing="false" text="Добавить" />
-         </children>
-      </Pane>
+            <Pane fx:id="MainMenu_InfoPane" layoutX="450.0" layoutY="4.0" prefHeight="533.0" prefWidth="440.0" style="-fx-background-color: #363636;">
+               <children>
+                  <Label fx:id="MainMenu_WebsiteName" layoutX="8.0" layoutY="109.0" prefHeight="25.0" prefWidth="425.0" style="-fx-background-color: #ffffff;" text="Label" />
+                  <Label fx:id="MainMenu_Url" layoutX="8.0" layoutY="190.0" prefHeight="25.0" prefWidth="425.0" style="-fx-background-color: #ffffff;" text="Label" />
+                  <Label fx:id="MainMenu_password" layoutX="5.0" layoutY="285.0" prefHeight="25.0" prefWidth="425.0" style="-fx-background-color: #ffffff;" text="Label" />
+               </children>
+            </Pane>
+            <Pane fx:id="MainMenu_editPane" layoutX="450.0" layoutY="4.0" prefHeight="533.0" prefWidth="440.0">
+               <children>
+                  <TextField fx:id="MainMenu_editPane_websiteName" layoutX="8.0" layoutY="110.0" prefHeight="25.0" prefWidth="425.0" promptText="website_name" />
+                  <TextField fx:id="MainMenu_editPane_url" layoutX="9.0" layoutY="191.0" prefHeight="25.0" prefWidth="418.0" promptText="url" />
+                  <TextField fx:id="MainMenu_editPane_login" layoutX="5.0" layoutY="284.0" prefHeight="25.0" prefWidth="425.0" promptText="login" />
+                  <PasswordField fx:id="MainMenu_editPane_password" layoutX="5.0" layoutY="371.0" prefHeight="25.0" prefWidth="425.0" promptText="password" />
+                  <Button fx:id="MainMenu_editPane_add" layoutX="176.0" layoutY="457.0" mnemonicParsing="false" text="Добавить" />
+               </children>
+            </Pane>
+         </children></AnchorPane>
    </children>
 </AnchorPane>

@@ -147,7 +147,6 @@ public class LoginController {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
         return salt;
     }
 

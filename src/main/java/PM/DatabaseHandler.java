@@ -116,46 +116,47 @@ public class DatabaseHandler extends Configs {
     }
 
 
+public List<UserStorage> getUserStorageForCurrentUser(User user) {
+    int userId = getUserId(user);
+    List<UserStorage> userStorageList = new ArrayList<>();
 
+    String select = "SELECT * FROM userstorage WHERE user_id = ?";
 
-    public List<UserStorage> getUserStorageForCurrentUser(User user) {
-        List<UserStorage> userStorageList = new ArrayList<>();
+    try {
+        Connection connection = getDbConnection();
+        if (connection != null) {
+            PreparedStatement prSt = connection.prepareStatement(select);
+            prSt.setInt(1, userId); // Используйте userId здесь
+            ResultSet resultSet = prSt.executeQuery();
 
-        String select = "SELECT * FROM userstorage WHERE user_id = ?";
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String websiteName = resultSet.getString("website_name");
+                String url = resultSet.getString("url");
+                String login = resultSet.getString("login");
+                String password = resultSet.getString("password");
+                byte[] passwordSalt = resultSet.getBytes("password_solt");
 
-        try {
-            Connection connection = getDbConnection();
-            if (connection != null) {
-                PreparedStatement prSt = connection.prepareStatement(select);
-                prSt.setInt(1, user.getId());
-                ResultSet resultSet = prSt.executeQuery();
-
-                while (resultSet.next()) {
-                    int id = resultSet.getInt("id");
-                    String websiteName = resultSet.getString("website_name");
-                    String url = resultSet.getString("url");
-                    String login = resultSet.getString("login");
-                    String password = resultSet.getString("password");
-                    byte[] passwordSalt = resultSet.getBytes("password_solt");
-
-                    UserStorage userStorage = new UserStorage(websiteName, url, login, password, passwordSalt);
-                    userStorage.setId(id);
-                    userStorage.setUser_id(user.getId());
-                    userStorageList.add(userStorage);
-                }
-
-                resultSet.close();
-                prSt.close();
-            } else {
-                System.out.println("Failed to establish database connection.");
+                UserStorage userStorage = new UserStorage(websiteName, url, login, password, passwordSalt);
+                userStorage.setId(id);
+                userStorage.setUser_id(user.getId());
+                userStorageList.add(userStorage);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+
+            resultSet.close();
+            prSt.close();
+        } else {
+            System.out.println("Failed to establish database connection.");
         }
-        return userStorageList;
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } catch (ClassNotFoundException e) {
+        e.printStackTrace();
     }
+    return userStorageList;
+}
+
+
 
     public int getUserId(User user) {
         int userId = 0;
