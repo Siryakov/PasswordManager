@@ -7,7 +7,7 @@ public class User {
     private byte[]  salt;
 
     private byte[] IV;
-
+    private int id;
 
 
     public User(String email, String password, byte[]  salt , byte[] IV ) {
@@ -53,7 +53,21 @@ public class User {
         this.IV = IV;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private static User currentUser;
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+    public static void setCurrentUser(User user) {
+        currentUser = user;
+    }
 
 
 

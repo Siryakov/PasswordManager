@@ -93,6 +93,7 @@ public class LoginController {
         }
         if (counter >= 1) {
             System.out.println("Success!");
+            User.setCurrentUser(user); // Сохранение пользователя в глобальной переменной
             openNewScene("/PM/Main-menu.fxml");
         } else {
             Shake userEmailAnimation = new Shake(Login_email);

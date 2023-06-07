@@ -7,4 +7,6 @@ public class Configs {
     protected String dbPass ="15Siryakov122001";
     protected String dbName ="PasswordManager";
 
+
+
 }
