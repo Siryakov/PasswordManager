@@ -1,11 +1,16 @@
 package PM;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import static PM.Encryption.generateIV;
 
@@ -70,20 +75,25 @@ public class SignInController {
 
         // Регистрация пользователя в базе данных
         dbHandler.signUser(user);
+
+        openNewScene("/PM/Login-view.fxml");
+    }
+    public void openNewScene(String windowName) {
+        SignIn_SigninButton.getScene().getWindow().hide();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(windowName));
+        try {
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
-//    private void signUpNewUser() {
-//        DatabaseHandler dbHandler = new DatabaseHandler();
-//        String email = SignIn_email.getText();
-//        String  password = SignIn_password.getText();
-//
-//        User user = new User(email,password);
-//
-//        dbHandler.signUser(user);
-//
-//
-//    }
+
 
 
 }

@@ -7,17 +7,17 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #222222;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PM.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"  style="-fx-background-color: #222222;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PM.LoginController">
    <children>
       <PasswordField fx:id="Login_password" layoutX="180.0" layoutY="221.0" prefHeight="36.0" prefWidth="215.0" promptText="Password">
          <font>
             <Font size="14.0" />
          </font></PasswordField>
-      <Button fx:id="Login_loginButton" layoutX="181.0" layoutY="278.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="215.0" text="Войти" textAlignment="CENTER">
+      <Button fx:id="Login_loginButton" layoutX="181.0" layoutY="278.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="215.0" style="-fx-background-color: #363636;" text="Войти" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button fx:id="Login_SigninButton" layoutX="181.0" layoutY="333.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="215.0" text="Создать аккаунт" textAlignment="CENTER">
+      <Button fx:id="Login_SigninButton" layoutX="181.0" layoutY="333.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="215.0" style="-fx-background-color: #363636;" text="Создать аккаунт" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Button>
